@@ -136,25 +136,17 @@ c       input file is written here.
 c***********************************************
 c     to read thermalized configuration
       if(init.eq.0)then
-        conf_path='/home/ilya/soft/lattice'//
-     *   '/general_code/tests/confs/SU3_conf/'//
-     *   'nt6/conf.0501_test'
+c        conf_path='/home/ilya/soft/lattice'//
+c     *   '/general_code/tests/confs/SU3_conf/'//
+c     *   'nt6/conf.0501_test'
 c        conf_path='conf.0501_test'
 c       OPEN(1,file='../../CONFIGS/CON000.LAT',
-        OPEN(1,file=conf_path,access='stream',
-     *form='unformatted',status='unknown')
+c        OPEN(1,file=conf_path,access='stream',
+c     *form='unformatted',status='unknown')
 c         read(1) u,v
 c         read(1) u,v,k1,k2
           read(1) z
         CLOSE(1)
-        Print *, z(1, 1, 1, 1)
-        Print *, z(1, 1, 2, 1)
-        Print *, z(1, 2, 1, 1)
-        Print *, z(1, 2, 2, 1)
-        Print *, z(1, 1, 1, 2)
-        Print *, z(1, 1, 2, 2)
-        Print *, z(1, 2, 1, 2)
-        Print *, z(1, 2, 2, 2)
         call plaq
       endif
       stop
