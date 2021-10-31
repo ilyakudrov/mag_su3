@@ -6,13 +6,13 @@
       1 28 20 5            niter   !
       1200.e6        timemax
       1              nhit
-      500 2000 3000           ngfmax
-      1.e-7 1.e-7          epsrzz
+      1000 2000 3000           ngfmax
+      1.e-12 1.e-12          epsrzz
       1.8            omega
-      10  100 1 10              nrnd   number  of random copies
+      1  100 1 10              nrnd   number  of random copies
       8             nstart for SA gf
       1  2000 1  13 81      ninit  initial config for given run
       1  100                      nstep  - change in config number
       2.0 1.0 0.5   2.0             coefficient for number of SA sweeps
-      8                        number of OR sweeps per one HB sweep
+      7                        number of OR sweeps per one HB sweep
 

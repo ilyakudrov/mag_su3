@@ -35,6 +35,8 @@ c       S.Kitahara (98.10.14)
 c----------------------------------------------------------------------
 
       include'paravp3'
+
+
       parameter(nbet=30)
       character*2 num(100)
       character*5 numc
@@ -95,6 +97,7 @@ c     open(7,status='unknown',file='ploop.dat')
       open(10,status='unknown',file='plaq.dat')
 c     open(12,status='unknown',file='plc.dat')
 c     open(14,status='unknown',file='plc_off.dat')
+      open(15,status='unknown',file='functional-temperature.dat')
       open(17,status='unknown',file='wrap.dat')
       open(18,status='unknown',file='cluster.dat')
       write(2,300) n1,n2,n3,n4,b,init,ints,nav,iter,niter,nhit
@@ -135,7 +138,7 @@ c       input file is written here.
       endif
 c***********************************************
 c     to read thermalized configuration
-      if(init.eq.0)then
+c      if(init.eq.0)then
 c        conf_path='/home/ilya/soft/lattice'//
 c     *   '/general_code/tests/confs/SU3_conf/'//
 c     *   'nt6/conf.0501_test'
@@ -145,11 +148,11 @@ c        OPEN(1,file=conf_path,access='stream',
 c     *form='unformatted',status='unknown')
 c         read(1) u,v
 c         read(1) u,v,k1,k2
-          read(1) z
-        CLOSE(1)
-        call plaq
-      endif
-      stop
+c          read(1) z
+c        CLOSE(1)
+c        call plaq
+c      endif
+c      stop
 c----------------------------------------------------------------------
 c     main loop start ------------------------------------------
 
@@ -158,8 +161,7 @@ c     main loop start ------------------------------------------
 c     do nnn = ninit,niter-1+ninit
 c       numc=num(nnn)
         write(numc,'(i5.5)') nnn
-        conf_path='/home/ilya/soft/lattice'//
-     *   '/general_code/tests/confs/SU3_conf/'//
+        conf_path='../confs/'//
      *   'nt6/conf.0501_test'
 c        conf_path='conf.0501_test'
 c       OPEN(1,file='../../CONFIGS/CON000.LAT',
@@ -169,6 +171,7 @@ c       OPEN(1,file='../../CONFIGS/CON0'//numc//'.LAT',
 c       OPEN(1,file='CON0'//numc//'.LAT',
 c    *      form='unformatted',status='unknown')
 c         read(1) z,k1,k2,rand
+         read(1) z
 
 c       OPEN(1,file=
 c     *'/scr/tokyo/public/configurations/BQCD/16x16x16x4/b_5.25/k_0.13605

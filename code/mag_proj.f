@@ -38,8 +38,8 @@ c     common /abplaq/ abpl(nsite,3,npl)  ! ab. plaq
       common /wrk2/ abpl(nsite,3,npl), ph(nsite,nd),fabp(nsite,npl)
 c     dimension     zx(nvect,3,3,nd),zy(nvect,3,3,nd),wg(nvect,3,3)
 c    c             ,qdi(nvect),qod(nvect),qre(nvect),qim(nvect)
-c     dimension     ab(nsite,3,nd)         ! ab. link 
-c     dimension     abp(nsite,3,npl),araux(3)         ! auxil. 
+c     dimension     ab(nsite,3,nd)         ! ab. link
+c     dimension     abp(nsite,3,npl),araux(3)         ! auxil.
 c     dimension     ph(nsite,nd),fabp(nsite,npl)  ! auxil.
       dimension     av(3)
 
@@ -49,7 +49,7 @@ c     dimension     ph(nsite,nd),fabp(nsite,npl)  ! auxil.
       sum=0.
       do i=1,3
       do l=1,nd
-      do m=1,nsite 
+      do m=1,nsite
        sum=sum+z(m,i,i,l)*conjg(z(m,i,i,l))
       enddo
       enddo
@@ -58,10 +58,10 @@ c     dimension     ph(nsite,nd),fabp(nsite,npl)  ! auxil.
       write(2,*)'R=',sum
 c abel. link angle calculation:
       do l=1,nd
-      do m=1,nsite 
+      do m=1,nsite
        ph(m,l) = (dimag(log(z(m,1,1,l)))+dimag(log(z(m,2,2,l)))+
      &             dimag(log(z(m,3,3,l))))
-c    &             dimag(log(z(m,3,3,l))))/3. 
+c    &             dimag(log(z(m,3,3,l))))/3.
       enddo
       enddo
       do l=1,nd
@@ -95,7 +95,7 @@ c abel. plaq. calculation:
       enddo
       do np=1,6
       do m=1,nsite
-       fabp(m,np)=abpl(m,1,np) + abpl(m,2,np) + abpl(m,3,np) 
+       fabp(m,np)=abpl(m,1,np) + abpl(m,2,np) + abpl(m,3,np)
       enddo
       enddo
       do np=1,6
@@ -106,22 +106,22 @@ c          araux(i)=abpl(m,i,np)
 c         enddo
          if(fabp(m,np).gt.0.0001) then
 	  abmax=0.
-	  do i=1,3 
+	  do i=1,3
 	   if(abpl(m,i,np).gt.abmax) then
 	    abmax=abpl(m,i,np)
 	    naux=i
            endif
-	  enddo   
+	  enddo
 c          naux=maxloc(araux)              ! location of max. value(F90)
            abpl(m,naux,np)=abpl(m,naux,np) - twopi
          else
 	  abmin=0.
-	  do i=1,3 
+	  do i=1,3
 	   if(abpl(m,i,np).lt.abmin) then
 	    abmin=abpl(m,i,np)
 	    naux=i
            endif
-	  enddo   
+	  enddo
 c          naux=minloc(araux)              ! location of min. value(F90)
            abpl(m,naux,np)=abpl(m,naux,np) + twopi
          endif
@@ -131,13 +131,13 @@ c          naux=minloc(araux)              ! location of min. value(F90)
 c check:
       do np=1,6
       do m=1,nsite
-       fabp(m,np)=abpl(m,1,np) + abpl(m,2,np) + abpl(m,3,np) 
+       fabp(m,np)=abpl(m,1,np) + abpl(m,2,np) + abpl(m,3,np)
        if(abs(fabp(m,np)).gt.0.0001) write(7,*) m,np,fabp(m,np)
       enddo
       enddo
 
 c average:
-      do i=1,3 
+      do i=1,3
        av(i) = 0.
       do np=1,6
       do m=1,nsite
@@ -154,7 +154,7 @@ c*********************************************************************c
 c*********************************************************************c
       subroutine sp_action(temp)
 c
-c to compute spin action: |u(1,1)|**2 + |u(2,2)|**2 +|u(3,3)|**2 
+c to compute spin action: |u(1,1)|**2 + |u(2,2)|**2 +|u(3,3)|**2
 c
 c     * Input arrays and parameters
 c         /var3/ : the gauge-fixed configuration.
@@ -172,13 +172,14 @@ c----------------------------------------------------------------------
       sum=0.
       do i=1,3
       do l=1,nd
-      do m=1,nsite 
+      do m=1,nsite
        sum=sum+z(m,i,i,l)*conjg(z(m,i,i,l))
       enddo
       enddo
       enddo
       sum=sum/(8.*nsite) - 0.5
       write(2,*)temp,sum
+      write(15,*)temp,sum
 
       return
       end

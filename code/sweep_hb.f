@@ -3,13 +3,13 @@ C**********************************************************************
       subroutine sweep_hb(am,fi,temp)
 c not vectorized !!!
 C updating for adjoint spin model with local couplings
-C this subrotine uses standard heatbath procedure 
+C this subrotine uses standard heatbath procedure
 C without overrelaxation.
 c input:a                                       +
 c am(nsite,nd,3,3) - matrix (1/2)*tr(U(x,id)*sigma_i*U(x,id)*sigma_j)
-c                                       
-c fi(nsite,3) - related tp gauge transformation: 
-c                + 
+c
+c fi(nsite,3) - related tp gauge transformation:
+c                +
 c               g(x)*sigma_3*g(x)=i*fi(x,i)*sigma_i
 C**********************************************************************
 C
@@ -123,13 +123,13 @@ c****************
        r2=rnd(0.d0)-0.5
        dv=r1*r1+r2*r2
        if(dv.gt.0.25) go to 7
-   
+
 c       X3=X3
        r=sqrt(r/dv)
        r1=r1*r
        r2=r2*r
-c  T 
-c o *si = (0,0,1)       
+c  T
+c o *si = (0,0,1)
        cna=si(3)*dm
 c****************
        if(abs(cna).gt.0.9999999) then
@@ -167,21 +167,21 @@ c     ENDIF
       enddo
 
 c final value:
-c     R=0.d0
-c     do i=1,3
-c     do j=1,3
-c     do mu=1,nd
-c     do m=1,nsite
-c      ns=im(m,mu,1) ! positive direct. step
-c      R=R+am(m,i,j,mu)*fi(m,i)*fi(ns,j)
-c     enddo
-c     enddo
-c     enddo
-c     enddo
-c     write(2,*) 'Rf=',R/nlink
+c      R=0.d0
+c      do i=1,3
+c      do j=1,3
+c      do mu=1,nd
+c      do m=1,nsite
+c       ns=im(m,mu,1) ! positive direct. step
+c       R=R+am(m,i,j,mu)*fi(m,i)*fi(ns,j)
+c      enddo
+c      enddo
+c      enddo
+c      enddo
+c      write(2,*) 'Rf=',R/nlink
 
-c       write(6,*) 'temp=',tem,'  beta=',bet
-c     write(6,*)'sweep_hb finished'
+c      write(6,*) 'temp=',tem,'  beta=',bet
+c      write(6,*)'sweep_hb finished'
 
       RETURN
       END
